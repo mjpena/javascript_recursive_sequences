@@ -48,8 +48,11 @@ function fibHelper(n){
 }
 
 //function to figure out fibonacci number
-var fib = function (n) {
+var fib = function (n, node) {
 	var tree = fibHelper(n);
+	node.appendChild(tree.html);
+		//node.style = "display: inline-block;";
+	  node.setAttribute("id", "fib");
 }
 
 //helper function to figure out pell number
@@ -103,8 +106,11 @@ function pellHelper(n){
 
 
 //function to figure out pell number
-var pell = function(n){
+var pell = function(n, node){
     var tree = pellHelper(n);
+	node.appendChild(tree.html);
+	  node.style = "display: inline-block;";
+	  node.setAttribute("id", "pell");
 }
 
 
@@ -153,7 +159,7 @@ function tribHelper(n){
         value = left.value + mid.value + right.value;
         //creates p tag and puts f(n) and its value in it
         var p = document.createElement('p');
-        p.textContent = 'trib(' + n + ') = ' + value;
+        p.textContent = 'Trib(' + n + ') = ' + value;
         
         //add p tag to doc
         div.appendChild(p);
@@ -168,12 +174,46 @@ function tribHelper(n){
 
 
 //function to figure out tribonacci number
-var trib = function(n){
+var trib = function(n, node){
     var tree = tribHelper(n);
+	node.appendChild(tree.html);
+	  //node.style = "display: inline-block;";
+	  node.setAttribute("id", "trib");
 }
 
-console.log(fib(0));
-console.log(fib(1));
-console.log(fib(2));
-console.log(fib(3));
-console.log(fib(4));
+
+var style = document.createElement('style');
+//style.textContent = 
+document.querySelector('body').appendChild(style);
+
+var divMakerMaker = function(color, id) {
+	return function() {
+		var div = document.createElement('div');
+		div.setAttribute('class', color + ' shadowed stuff-box');
+		div.setAttribute('id', id);
+		document.body.appendChild(div);
+	}
+}
+
+
+var divMaker = function(id) {
+	return function() {
+		var div = document.createElement('div');
+		div.setAttribute('id', id);
+		document.body.appendChild(div);
+	}
+}
+
+var fibDiv = divMakerMaker('fib');
+var pellDiv = divMakerMaker('pell');
+var tribDiv = divMakerMaker('trib');
+
+fibDiv();
+pellDiv();
+tribDiv();
+
+
+fib(3, document.querySelector('.fib'));
+pell(3, document.querySelector('.pell'));
+trib(3, document.querySelector('.trib'));
+
