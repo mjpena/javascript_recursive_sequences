@@ -193,7 +193,6 @@ var divMakerMaker = function(color, id){
 }
 
 var fibDiv = divMakerMaker('fib');
-var result = fibDiv.link("https://oeis.org/A000045");
 var pellDiv = divMakerMaker('pell');
 var tribDiv = divMakerMaker('trib');
 
