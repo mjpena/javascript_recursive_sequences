@@ -1,4 +1,5 @@
 //helper function to figure out fibonacci number
+document.title = "Fun Math Recursion";
 function fibHelper(n){
     var value; 
     //create div element and add to doc
@@ -213,7 +214,7 @@ pellDiv();
 tribDiv();
 
 
-fib(3, document.querySelector('.fib'));
-pell(3, document.querySelector('.pell'));
-trib(3, document.querySelector('.trib'));
+fib(4, document.querySelector('.fib'));
+pell(4, document.querySelector('.pell'));
+trib(4, document.querySelector('.trib'));
 
