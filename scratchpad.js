@@ -182,12 +182,8 @@ var trib = function(n, node){
 	  node.setAttribute("id", "trib");
 }
 
-
-var style = document.createElement('style');
-//style.textContent = 
-document.querySelector('body').appendChild(style);
-
-var divMakerMaker = function(color, id) {
+//div maker
+var divMakerMaker = function(color, id){
 	return function() {
 		var div = document.createElement('div');
 		div.setAttribute('class', color + ' shadowed stuff-box');
@@ -196,16 +192,8 @@ var divMakerMaker = function(color, id) {
 	}
 }
 
-
-var divMaker = function(id) {
-	return function() {
-		var div = document.createElement('div');
-		div.setAttribute('id', id);
-		document.body.appendChild(div);
-	}
-}
-
 var fibDiv = divMakerMaker('fib');
+var result = fibDiv.link("https://oeis.org/A000045");
 var pellDiv = divMakerMaker('pell');
 var tribDiv = divMakerMaker('trib');
 
