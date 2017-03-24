@@ -28,9 +28,10 @@
 }
 
 .trib-mid{
-	float:right;
+    float: none;
 	display: inline-block;
-	margin-right: 40px;
+	margin-right: 4px;
+	margin-left: 4px;
 }
 
 .trib-right {
@@ -56,11 +57,9 @@
 	margin-left: 4px;
 }
 
-.shadowed {
-	text-shadow: 1px 1px 2px black;
+.container {
+    text-shadow: 1px 1px 2px black;
 	color:       white;
-}
-.stuff-box {
 	font-family: 'helvetica neue', helvetica, sans-serif;
 	letter-spacing: 1px;
 	text-transform: capitalize;

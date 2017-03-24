@@ -8,7 +8,7 @@ function fibHelper(n) {
 
 	n = parseInt(n);
 
-	// leaf nodes aka. base case
+	//base case
 	if (n < 2) {
 		if (n === 0) {
 			value = 0;
