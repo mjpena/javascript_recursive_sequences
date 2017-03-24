@@ -1,207 +1,200 @@
-//helper function to figure out fibonacci number
-document.title = "Fun Math Recursion";
-function fibHelper(n){
-    var value; 
-    //create div element and add to doc
-    var div = document.createElement('div');
-    //set class = "fib"
-    div.setAttribute("class", "fib");
-    
-    //base cases
-    if(n <2){
-        if(n === 0) value = 0;
-        else if( n === 1) value = 1;
-        
-        //creates p tag and puts fib number sequence and its value
-        var p = document.createElement('p');
-        p.textContent = 'Fib('+ n +') = ' + value;
-        //adds p tag to div
-        div.appendChild(p);
-    }
-    else{
-        //gets n-1 fibonacci term  (left child)
-        var left = fibHelper(n-1);
-        //get the class of the left child
-        var leftClass = left.html.getAttribute("class");
-        //sets the class of the left child
-        left.html.setAttribute("class", leftClass + "fib-left");
-        
-        //gets n-2 fibonacci term (right child)
-        var right = fibHelper(n-2);
-        var rightClass = right.html.getAttribute("class");
-        //sets the class of the right child
-        right.html.setAttribute("class", rightClass + "fib-right");
-        
-        //f(n) = f(n-1) + f(n-2)
-        value = left.value + right.value;
-        //creates p tag and puts f(n) and its value in it
-        var p = document.createElement('p');
-        p.textContent = 'Fib(' + n + ') = ' + value;
-        
-        //add p tag to doc
-        div.appendChild(p);
-        //add left and right child to doc
-        div.appendChild(left.html);
-        div.appendChild(right.html);
-    }
-    //returns the fibonacci number
-    return { 'value': value, 'html': div};
+//code for making fibonacci slider and styles taken from in class code
+document.title = "Fun with Recursion";
+
+function fibHelper(n) {
+	var value;
+	var div = document.createElement('div');
+	div.setAttribute("class", "fib");
+
+	n = parseInt(n);
+
+	// leaf nodes aka. base case
+	if (n < 2) {
+		if (n === 0) {
+			value = 0;
+		}
+		else if (n === 1) {
+			value = 1;
+		}
+		var p = document.createElement('p');
+		p.textContent = 'Fib(' + n + ') = ' + value;
+		div.appendChild(p)
+	}
+	else {
+		var left = fibHelper(n - 1);
+		var clas = left.html.getAttribute('class');
+		left.html.setAttribute('class', clas + ' fib-left');
+
+		var right = fibHelper(n - 2);
+		clas = right.html.getAttribute('class');
+		right.html.setAttribute('class', clas + ' fib-right');
+
+		value = left.value + right.value;
+		var p = document.createElement('p');
+		p.textContent = 'Fib(' + n + ') = ' + value;
+		div.appendChild(p);
+
+		div.appendChild(left.html);
+		div.appendChild(right.html);
+	}
+
+	return { 'value': value, 'html': div };
 }
 
-//function to figure out fibonacci number
 var fib = function (n, node) {
+	var fibTree = node.querySelector('div.fib');
+	if (fibTree) {
+		node.removeChild(fibTree);
+	}
+
 	var tree = fibHelper(n);
 	node.appendChild(tree.html);
-		//node.style = "display: inline-block;";
-	  node.setAttribute("id", "fib");
 }
 
-//helper function to figure out pell number
-function pellHelper(n){
-    var value; 
-    //create div element and add to doc
-    var div = document.createElement('div');
-    //set class = "pell"
-    div.setAttribute("class", "pell");
-    
-    //base cases
-    if(n <2){
-        if(n === 0) value = 0;
-        else if( n === 1) value = 1;
-        
-        //creates p tag and puts pell number sequence and its value
-        var p = document.createElement('p');
-        p.textContent = 'Pell('+ n +') = ' + value;
-        //adds p tag to div
-        div.appendChild(p);
-    }
-    else{
-        //gets n-1 pell term  (left child)
-        var left = pellHelper(n-1);
-        //get the class of the left child
-        var leftClass = left.html.getAttribute("class");
-        //sets the class of the left child
-        left.html.setAttribute("class", leftClass + "pell-left");
-        
-        //gets n-2 pell term (right child)
-        var right = pellHelper(n-2);
-        var rightClass = right.html.getAttribute("class");
-        //sets the class of the right child
-        right.html.setAttribute("class", rightClass + "pell-right");
-        
-        //f(n) = 2*f(n-1) + f(n-2)
-        value = 2*left.value + right.value;
-        //creates p tag and puts f(n) and its value in it
-        var p = document.createElement('p');
-        p.textContent = 'Pell(' + n + ') = ' + value;
-        
-        //add p tag to doc
-        div.appendChild(p);
-        //add left and right child to doc
-        div.appendChild(left.html);
-        div.appendChild(right.html);
-    }
-    //returns the pell number
-    return { 'value': value, 'html': div};
+var fibButton = function(me) {
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	fib(value, form.parentNode);
 }
 
-
-//function to figure out pell number
-var pell = function(n, node){
-    var tree = pellHelper(n);
-	node.appendChild(tree.html);
-	  node.style = "display: inline-block;";
-	  node.setAttribute("id", "pell");
+var fibSlider = function(me) {
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Fib(' + me.value + ')';
 }
 
-
-//helper function to figure out tribonacci number
+//tribinacci stuff here
 function tribHelper(n){
-    var value; 
-    //create div element and add to doc
-    var div = document.createElement('div');
-    //set class = "trib"
-    div.setAttribute("class", "trib");
-    
-    //base cases
-    if(n <3){
-        if(n === 0) value = 0;
-        else if( n === 1) value = 0;
-        else if( n === 2) value = 1;
-        
-        //creates p tag and puts trib number sequence and its value
-        var p = document.createElement('p');
-        p.textContent = 'Trib('+ n +') = ' + value;
-        //adds p tag to div
-        div.appendChild(p);
-    }
-    else{
-        //gets n-1 tribonacci term  (left child)
-        var left = tribHelper(n-1);
-        //get the class of the left child
-        var leftClass = left.html.getAttribute("class");
-        //sets the class of the left child
-        left.html.setAttribute("class", leftClass + "trib-left");
-        
-        //gets n-2 tribanocci term (mid child)
-        var mid = tribHelper(n-2);
-        //get the class of the mid child
-        var midClass = mid.html.getAttribute("class");
-        //sets the class of the mid child
-        mid.html.setAttribute("class", midClass + "trib-mid");
-        
-        //gets n-3 tribonacci term (right child)
-        var right = tribHelper(n-3);
-        var rightClass = right.html.getAttribute("class");
-        //sets the class of the right child
-        right.html.setAttribute("class", rightClass + "trib-right");
-        
-        //f(n) = 2*f(n-1) + f(n-2) + f(n-3)
-        value = left.value + mid.value + right.value;
-        //creates p tag and puts f(n) and its value in it
-        var p = document.createElement('p');
-        p.textContent = 'Trib(' + n + ') = ' + value;
-        
-        //add p tag to doc
-        div.appendChild(p);
-        //add left and right child to doc
-        div.appendChild(left.html);
-        div.appendChild(mid.html);
-        div.appendChild(right.html);
-    }
-    //returns the tribonacci number
-    return { 'value': value, 'html': div};
-}
+	console.log(n);
+	var value;
+	var div = document.createElement('div');
+	div.setAttribute("class", "trib");
 
-
-//function to figure out tribonacci number
-var trib = function(n, node){
-    var tree = tribHelper(n);
-	node.appendChild(tree.html);
-	  //node.style = "display: inline-block;";
-	  node.setAttribute("id", "trib");
-}
-
-//div maker
-var divMakerMaker = function(color, id){
-	return function() {
-		var div = document.createElement('div');
-		div.setAttribute('class', color + ' shadowed stuff-box');
-		div.setAttribute('id', id);
-		document.body.appendChild(div);
+	n = parseInt(n);
+	//base case
+ 	if(n<3){
+		if (n === 0) {
+			value = 0;
+		}
+		else if (n === 1) {
+			value = 1;
+		}
+		else if (n === 2){
+			value = 1;
+		}
+		var p = document.createElement('p');
+		p.textContent = 'Trib(' + n + ') = ' + value;
+		div.appendChild(p)
 	}
+	else{
+		var left = tribHelper(n - 1);
+		var clas = left.html.getAttribute('class');
+		left.html.setAttribute('class', clas + ' trib-left');
+
+		var mid = tribHelper(n-2);
+		var clas = mid.html.getAttribute('class');
+		mid.html.setAttribute('class', clas + ' trib-mid');
+
+		var right = tribHelper(n - 3);
+		clas = right.html.getAttribute('class');
+		right.html.setAttribute('class', clas + ' fib-right');
+
+		value = left.value + mid.value + right.value;
+		var p = document.createElement('p');
+		p.textContent = 'Trib(' + n + ') = ' + value;
+		div.appendChild(p);
+
+		div.appendChild(left.html);
+		div.appendChild(mid.html);
+		div.appendChild(right.html);
+	}
+	return { 'value': value, 'html': div };
 }
 
-var fibDiv = divMakerMaker('fib');
-var pellDiv = divMakerMaker('pell');
-var tribDiv = divMakerMaker('trib');
+var trib = function(n, node){
+	var tribTree = node.querySelector('div.trib');
+	if (tribTree) {
+		node.removeChild(tribTree);
+	}
 
-fibDiv();
-pellDiv();
-tribDiv();
+	var tree = tribHelper(n);
+	node.appendChild(tree.html);
+}
 
+var tribButton = function(me){
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	trib(value, form.parentNode);
+}
 
-fib(4, document.querySelector('.fib'));
-pell(4, document.querySelector('.pell'));
-trib(4, document.querySelector('.trib'));
+var tribSlider = function(me){
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Trib(' + me.value + ')';
+}
 
+//pell function stuff here
+function pellHelper(n){
+	var value;
+	var div = document.createElement('div');
+	div.setAttribute("class", "pell");
+
+	n = parseInt(n);
+
+	// leaf nodes aka. base case
+	if (n < 2) {
+		if (n === 0) {
+			value = 0;
+		}
+		else if (n === 1) {
+			value = 1;
+		}
+		var p = document.createElement('p');
+		p.textContent = 'Pell(' + n + ') = ' + value;
+		div.appendChild(p)
+	}
+	else {
+		var left = pellHelper(n - 1);
+		var clas = left.html.getAttribute('class');
+		left.html.setAttribute('class', clas + ' pell-left');
+
+		var right = pellHelper(n - 2);
+		clas = right.html.getAttribute('class');
+		right.html.setAttribute('class', clas + ' pell-right');
+
+		value = 2*left.value + right.value;
+		var p = document.createElement('p');
+		p.textContent = 'Pell(' + n + ') = ' + value;
+		div.appendChild(p);
+
+		div.appendChild(left.html);
+		div.appendChild(right.html);
+	}
+
+	return { 'value': value, 'html': div };
+}
+
+var pell = function(n, node){
+	var pellTree = node.querySelector('div.pell');
+	if(pellTree){
+		node.removeChild(pell.html);
+	}
+
+	var tree = pellHelper(n);
+	node.appendChild(tree.html);
+}
+
+var pellButton = function(me){
+	var form = me.parentNode;
+	var slider = form.querySelector('input');
+	var value = slider.value;
+	pell(value, form.parentNode);
+}
+
+var pellSlider = function(me){
+	var form = me.parentNode;
+	var button = form.querySelector('button');
+	button.textContent = 'Pell(' + me.value + ')';
+}
