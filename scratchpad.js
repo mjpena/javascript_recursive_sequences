@@ -143,7 +143,6 @@ function pellHelper(n){
 
 	n = parseInt(n);
 
-	// leaf nodes aka. base case
 	if (n < 2) {
 		if (n === 0) {
 			value = 0;
@@ -179,7 +178,7 @@ function pellHelper(n){
 var pell = function(n, node){
 	var pellTree = node.querySelector('div.pell');
 	if(pellTree){
-		node.removeChild(pell.html);
+		node.removeChild(pellTree);
 	}
 
 	var tree = pellHelper(n);
